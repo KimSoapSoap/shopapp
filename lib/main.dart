@@ -16,14 +16,6 @@ class MyApp extends StatelessWidget {
 }
 
 class ShopPage extends StatelessWidget {
-  //객체의 상태
-  List<String> imageList = [
-    "https://picsum.photos/id/100/200/200",
-    "https://picsum.photos/id/101/200/200",
-  ];
-
-  int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     print("ShopPage 그림그려짐");
@@ -33,57 +25,9 @@ class ShopPage extends StatelessWidget {
       //Column일 때는 자녀의 크기만큼 가로 크기가 결정된다.
       body: Column(
         children: [
-          // 1. 이미지
-          AspectRatio(
-            aspectRatio: 3 / 2,
-            child: Image.network(
-              imageList[selectedIndex],
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // 2. 버튼 2개
-          //Column 자녀에 Row()를 배치해서 가로로 늘어남
-          //즉 위에 이미지도 가운데로 감( Column은 crosAxias가 기본 center기 때문에)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                width: 70,
-                height: 70,
-                decoration: BoxDecoration(
-                  //BoxDecoration 쓰면 Container에 색상 주면 안 되고 BoxDecoration에 생상을 줘야한다..
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: IconButton(
-                    onPressed: () {
-                      selectedIndex = 0;
-                      print("selectedIndex: $selectedIndex");
-                    },
-                    icon: Icon(Icons.account_circle_sharp)),
-              ),
-              Container(
-                width: 70,
-                height: 70,
-                decoration: BoxDecoration(
-                  //BoxDecoration 쓰면 Container에 색상 주면 안 되고 BoxDecoration에 생상을 줘야한다..
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: IconButton(
-                    onPressed: () {
-                      selectedIndex = 1;
-                      print("selectedIndex: $selectedIndex");
-                    },
-                    icon: Icon(
-                      Icons.access_alarm,
-                      color: Colors.purple,
-                    )),
-              ),
-            ],
-          ),
-
+          // 이미지
+          // 버튼2개
+          Header(),
           // 3. 동그라미 2개
           _circle(),
           _field(),
@@ -127,6 +71,83 @@ class ShopPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(75)),
         ),
       ),
+    );
+  }
+}
+
+class Header extends StatefulWidget {
+  @override
+  State<Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
+  //객체의 상태
+  List<String> imageList = [
+    "https://picsum.photos/id/100/200/200",
+    "https://picsum.photos/id/101/200/200",
+  ];
+
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // 1. 이미지
+        AspectRatio(
+          aspectRatio: 3 / 2,
+          child: Image.network(
+            imageList[selectedIndex],
+            fit: BoxFit.cover,
+          ),
+        ),
+
+        // 2. 버튼 2개
+        //Column 자녀에 Row()를 배치해서 가로로 늘어남
+        //즉 위에 이미지도 가운데로 감( Column은 crosAxias가 기본 center기 때문에)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                //BoxDecoration 쓰면 Container에 색상 주면 안 되고 BoxDecoration에 생상을 줘야한다..
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedIndex = 0;
+                      print("selectedIndex: $selectedIndex");
+                    });
+                  },
+                  icon: Icon(Icons.account_circle_sharp)),
+            ),
+            Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                //BoxDecoration 쓰면 Container에 색상 주면 안 되고 BoxDecoration에 생상을 줘야한다..
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedIndex = 1;
+                      print("selectedIndex: $selectedIndex");
+                    });
+                  },
+                  icon: Icon(
+                    Icons.access_alarm,
+                    color: Colors.purple,
+                  )),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
