@@ -69,24 +69,47 @@ class ShopPage extends StatelessWidget {
           ),
 
           // 3. 동그라미 2개
-          Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(),
-                borderRadius: BorderRadius.circular(100)),
-            child: Align(
-              child: Container(
-                width: 150,
-                height: 150,
-                decoration: BoxDecoration(
-                    color: Colors.deepOrange,
-                    borderRadius: BorderRadius.circular(75)),
-              ),
-            ),
-          )
+          _circle(),
+          _field(),
         ],
+      ),
+    );
+  }
+
+  Stack _field() {
+    return Stack(children: [
+      TextFormField(
+        maxLines: 3, // 여러 줄 입력 허용
+        decoration: InputDecoration(
+          suffixIcon: Icon(Icons.person),
+          enabledBorder: OutlineInputBorder(),
+        ),
+      ),
+      Positioned(
+        left: 200,
+        top: 50,
+        child: Icon(Icons.person),
+      )
+    ]);
+  }
+
+  Container _circle() {
+    return Container(
+      width: 200,
+      height: 200,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(100)),
+      child: Align(
+        alignment: Alignment(1, 0),
+        child: Container(
+          width: 150,
+          height: 150,
+          decoration: BoxDecoration(
+              color: Colors.deepOrange,
+              borderRadius: BorderRadius.circular(75)),
+        ),
       ),
     );
   }
