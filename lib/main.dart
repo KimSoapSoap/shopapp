@@ -16,8 +16,17 @@ class MyApp extends StatelessWidget {
 }
 
 class ShopPage extends StatelessWidget {
+  //객체의 상태
+  List<String> imageList = [
+    "https://picsum.photos/id/100/200/200",
+    "https://picsum.photos/id/101/200/200",
+  ];
+
+  int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    print("ShopPage 그림그려짐");
     return Scaffold(
       appBar: AppBar(title: Text("쇼핑카트")),
       //Column을 ListView로 바꾸면 화면을 꽉 채운다.
@@ -28,7 +37,7 @@ class ShopPage extends StatelessWidget {
           AspectRatio(
             aspectRatio: 3 / 2,
             child: Image.network(
-              "https://picsum.photos/id/100/200/200",
+              imageList[selectedIndex],
               fit: BoxFit.cover,
             ),
           ),
@@ -48,7 +57,11 @@ class ShopPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: IconButton(
-                    onPressed: () {}, icon: Icon(Icons.account_circle_sharp)),
+                    onPressed: () {
+                      selectedIndex = 0;
+                      print("selectedIndex: $selectedIndex");
+                    },
+                    icon: Icon(Icons.account_circle_sharp)),
               ),
               Container(
                 width: 70,
@@ -59,7 +72,10 @@ class ShopPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      selectedIndex = 1;
+                      print("selectedIndex: $selectedIndex");
+                    },
                     icon: Icon(
                       Icons.access_alarm,
                       color: Colors.purple,
